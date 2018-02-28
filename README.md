@@ -29,10 +29,10 @@ Build and Deploy the Quickstart
   InstallDir/etc/org.jboss.fuse.quickstarts.camel.aws.s3.cfg
   Edit the org.jboss.fuse.quickstarts.camel.aws.s3.cfg file with a text editor and add the following contents:
 
-  accessKey=<AWS S3 access key>
-  secretKey=<AWS S3 secret key>
-  region=<AWS S3 region>
-  bucket=<AWS S3 bucket>
+  accessKey=<accessKey>
+  secretKey=<secretKey>
+  region=<region>
+  bucket=<bucket>
 
 * In the JBoss Fuse console, enter the following commands:
 
