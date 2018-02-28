@@ -7,7 +7,7 @@ What is it?
 
 This quick start shows how to use Apache Camel, and its OSGi integration to use the OSGi config admin and transfer files from an S3 Bucket.
 
-This quick start combines use of the Camel File component, which reads files and uses the Camel AWS s3 component to consume the from an S3 Bucket.
+This quick start combines use of the Camel File component, which reads files and uses the Camel AWS s3 component to consume files from an S3 Bucket.
 
 System requirements
 -------------------
