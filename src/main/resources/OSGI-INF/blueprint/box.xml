@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+
+     Copyright 2005-2017 Red Hat, Inc.
+
+     Red Hat licenses this file to you under the Apache License, version
+     2.0 (the "License"); you may not use this file except in compliance
+     with the License.  You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+     implied.  See the License for the specific language governing
+     permissions and limitations under the License.
+
+-->
+<!--
+   This is the OSGi Blueprint XML file defining the Camel context and routes.  Because the file is in the
+   OSGI-INF/blueprint directory inside our JAR, it will be automatically activated as soon as the bundle is installed.
+
+   The root element for any OSGi Blueprint file is 'blueprint' - you also see the namespace definitions for both the Blueprint
+   and the Camel namespaces.
+-->
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+           xsi:schemaLocation="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.0.0.xsd
+             http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd
+             http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+
+    <!-- osgi blueprint property placeholder -->
+    <cm:property-placeholder id="placeholder" persistent-id="org.jboss.fuse.quickstarts.camel.aws.s3"/>
+
+    <camelContext xmlns="http://camel.apache.org/schema/blueprint" id="aws-s3-example-context">
+        <route id="aws-s3-route">
+            <from uri="aws-s3:{{bucket}}?maxMessagesPerPoll=5&amp;deleteAfterRead=false&amp;accessKey={{accessKey}}&amp;secretKey={{secretKey}}&amp;region={{region}}"/>
+            <log message="The following file has been picked for file transfer: ${header.CamelAwsS3Key}"/>
+            <log message="Moving file"/>
+            <toD uri="file:/tmp/out?fileName=${header.CamelAwsS3Key}"/>
+        </route>
+    </camelContext>
+
+</blueprint>
